@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Recovery Check-In</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-card">
+        <p class="eyebrow">Daily Recovery Check-In</p>
+        <h1>Take a quiet minute to notice how today feels.</h1>
+        <p class="hero-copy">
+          Track your mood, leave yourself a note, and collect a gentle message
+          for each day you show up.
+        </p>
+        <p class="hero-support">
+          This app is designed to support individuals in recovery through daily
+          reflection, encouragement, and tracking progress.
+        </p>
+        <section class="about-card" aria-labelledby="aboutHeading">
+          <p class="tracker-label">About</p>
+          <h2 id="aboutHeading">About this app</h2>
+          <p class="hero-story">
+            I created this app as a daily recovery check-in tool designed to
+            support individuals in building awareness, tracking progress, and
+            staying encouraged. As someone involved in the recovery community, I
+            wanted to build something simple, accessible, and meaningful that
+            could actually be used in real-life settings.
+          </p>
+        </section>
+        <section class="tracker-card" aria-labelledby="trackerHeading">
+          <div class="tracker-copy">
+            <p class="tracker-label">Recovery Date Tracker</p>
+            <h2 id="trackerHeading">Keep your starting point close.</h2>
+          </div>
+          <div class="tracker-controls">
+            <label class="tracker-field" for="sobrietyDate">
+              <span class="tracker-input-label">Sobriety date</span>
+              <input id="sobrietyDate" type="date" />
+            </label>
+            <div class="counter-card" aria-live="polite">
+              <p id="recoveryCounter" class="counter-text">
+                Choose a date to begin your recovery counter.
+              </p>
+              <p id="counterMessage" class="counter-message">
+                One day at a time still counts.
+              </p>
+            </div>
+          </div>
+          <div class="tracker-stats">
+            <article class="stat-card">
+              <p class="stat-label">Streak Counter</p>
+              <p id="streakCounter" class="stat-value">0 days</p>
+              <p class="stat-note">Each day in a row is worth noticing.</p>
+            </article>
+          </div>
+          <section class="milestones-card" aria-labelledby="milestonesHeading">
+            <div class="milestones-header">
+              <div>
+                <p class="tracker-label">Milestones</p>
+                <h3 id="milestonesHeading">30, 60, and 90 days</h3>
+              </div>
+              <p id="milestoneSummary" class="milestone-summary">
+                Add your sobriety date to see milestone progress.
+              </p>
+            </div>
+            <div id="milestonesList" class="milestones-list"></div>
+          </section>
+        </section>
+        <div class="date-chip" id="todayLabel" aria-live="polite"></div>
+      </section>
+
+      <section class="panel check-in-panel">
+        <div class="section-heading">
+          <h2>Today’s Check-In</h2>
+          <p>Choose the mood that feels closest, even if it is not perfect.</p>
+        </div>
+
+        <div
+          class="mood-grid"
+          id="moodGrid"
+          role="radiogroup"
+          aria-label="Select your mood for today"
+        >
+          <button
+            class="mood-option"
+            data-mood="Struggling"
+            type="button"
+            role="radio"
+            aria-checked="false"
+          >
+            <span class="mood-emoji" aria-hidden="true">Rainy</span>
+            <span class="mood-label">Struggling</span>
+            <span class="mood-note">Heavy, tired, or overwhelmed</span>
+          </button>
+          <button
+            class="mood-option"
+            data-mood="Steady"
+            type="button"
+            role="radio"
+            aria-checked="false"
+          >
+            <span class="mood-emoji" aria-hidden="true">Grounded</span>
+            <span class="mood-label">Steady</span>
+            <span class="mood-note">Holding on and getting through</span>
+          </button>
+          <button
+            class="mood-option"
+            data-mood="Hopeful"
+            type="button"
+            role="radio"
+            aria-checked="false"
+          >
+            <span class="mood-emoji" aria-hidden="true">Sunrise</span>
+            <span class="mood-label">Hopeful</span>
+            <span class="mood-note">Open to progress and possibility</span>
+          </button>
+          <button
+            class="mood-option"
+            data-mood="Proud"
+            type="button"
+            role="radio"
+            aria-checked="false"
+          >
+            <span class="mood-emoji" aria-hidden="true">Bright</span>
+            <span class="mood-label">Proud</span>
+            <span class="mood-note">Recognizing effort and strength</span>
+          </button>
+        </div>
+
+        <label class="notes-field" for="notesInput">
+          <span class="notes-label">Notes for today</span>
+          <textarea
+            id="notesInput"
+            rows="6"
+            placeholder="What helped today? What felt hard? What do you want to remember?"
+          ></textarea>
+        </label>
+
+        <section class="message-card" aria-live="polite">
+          <p class="message-label">Today’s Encouragement</p>
+          <p id="encouragementMessage" class="message-text"></p>
+        </section>
+
+        <div class="action-row">
+          <button id="saveButton" class="primary-button" type="button">
+            Save Today’s Check-In
+          </button>
+          <p id="saveStatus" class="save-status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="panel history-panel">
+        <div class="section-heading">
+          <div>
+            <h2>Recent Days</h2>
+            <p>A simple record of the care you have already given yourself.</p>
+          </div>
+          <button id="exportButton" class="secondary-button" type="button">
+            Download Check-Ins
+          </button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
